@@ -54,3 +54,10 @@ bind_rows(michael, .id = "album") %>%
   mutate(rank = min_rank(peak)) %>% 
   filter(rank == 1) %>% 
   select(-rank, -peak)
+
+seventies %>% 
+  # Coerce seventies$year into a useful numeric
+  mutate(year = as.numeric(as.character(year))) %>% 
+  # Bind the updated version of seventies to sixties
+  bind_rows(sixties) %>% 
+  arrange(year)
